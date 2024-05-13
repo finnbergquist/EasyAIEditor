@@ -2,10 +2,13 @@ import { UploadCloud } from "lucide-react";
 import { uploadFile } from "../../../api/api";
 import React from "react";
 import { Loader } from 'lucide-react';
+import { submitForm } from "../../../api/api";
+import { useNavigate } from 'react-router-dom';
 
-const ImageUploader = ({form, setForm}) => {
+const ImageUploader = ({form, setForm, user}) => {
     const [loading, setLoading] = React.useState(false);
     const fileInputRef = React.useRef(null);
+    const navigate = useNavigate();
 
     const handleDrop = async (e) => {
         setLoading(true);
@@ -16,9 +19,16 @@ const ImageUploader = ({form, setForm}) => {
             const response = await uploadFile(file);
             if (response.status === "success") { 
                 setLoading(false); 
-                setForm({
-                    ...form,
-                    selectedImage: response.url
+                form.selectedImage = response.url;
+                await submitForm(form, user.user_id)
+                    .then(data => {
+                    setForm(data.data);
+                    setLoading(false)
+                    navigate(`/form/${data.form_id}`);
+                    })
+                    .catch(error => {
+                    console.error('Error:', error);
+                    // Handle the error as needed
                 });
             }
         } catch (error) {

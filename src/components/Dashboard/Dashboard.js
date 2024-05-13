@@ -22,7 +22,6 @@ const Dashboard = ({ form, setForm, user, setUser }) => {
     
     submitForm(form, user.user_id)
       .then(data => {
-        console.log('Success:', data);
         setForm(data.data);
         setLoading(false)
         navigate(`/form/${data.form_id}`);
@@ -32,8 +31,6 @@ const Dashboard = ({ form, setForm, user, setUser }) => {
         // Handle the error as needed
       });
     ;
-
-
   }
 
   return (
@@ -41,7 +38,7 @@ const Dashboard = ({ form, setForm, user, setUser }) => {
       <Header user={user} setUser={setUser}/>
       <div className="px-36 py-8">
 
-        <ImageUploader form={form} setForm={setForm} />
+        <ImageUploader form={form} setForm={setForm} user={user} />
 
       </div>
 
