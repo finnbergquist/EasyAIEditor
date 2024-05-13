@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from './components/Dashboard/Dashboard.js'; 
 import Form from './components/Form/Form.js';
-import Header from './components/Header/Header.js';
 import Login from './components/Login/Login.js';
 import Register from './components/Register/Register.js';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.js';
@@ -20,13 +19,12 @@ function AppRouter() {
           <Route path="/register" element={<Register setUser={setUser} />} />
           <Route path="/dashboard" element={
             <ProtectedRoute user={user}>
-              <Header />
-              <Dashboard form={form} setForm={setForm} user={user} />
+              <Dashboard form={form} setForm={setForm} user={user} setUser={setUser} />
             </ProtectedRoute>
           } />
           <Route path="/form/:id" element={
             <ProtectedRoute user={user}>
-              <Form form={form} setForm={setForm} />
+              <Form form={form} setForm={setForm} user={user} setUser={setUser}/>
             </ProtectedRoute>
           } />
         </Routes>

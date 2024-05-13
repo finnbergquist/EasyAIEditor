@@ -6,7 +6,6 @@ class Prompter extends React.Component {
   constructor(props) {
     super();
     this.state = props.form
-    console.log("Prompter State:", props);
   }
 
   handleChangePrompt = (event) => {

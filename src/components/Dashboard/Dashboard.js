@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Prompter from './Prompter/Prompter.js';
 import Gallery from './Gallery/Gallery.js';
+import Header from '../Header/Header.js';
+import ImageUploader from './ImageUploader/ImageUploader.js';
 import { submitForm } from "../../api/api.js";
 import { useNavigate } from 'react-router-dom';
 
-const Dashboard = ({ form, setForm, user }) => {
+const Dashboard = ({ form, setForm, user, setUser }) => {
   const navigate = useNavigate();
   const handleUpdateForm = (newForm) => {
     setForm(newForm);
@@ -36,18 +38,15 @@ const Dashboard = ({ form, setForm, user }) => {
 
   return (
     <div>
-      <div className={`pt-4 flex flex-col items-center justify-center w-1/2 mx-auto  bg-white rounded shadow-lg`}>
-        <Prompter 
-          form={form} 
-          handleUpdateForm={handleUpdateForm} 
-          generateImages={generateImages}
-          loading={loading}
-        />
+      <Header user={user} setUser={setUser}/>
+      <div className="px-36 py-8">
+
+        <ImageUploader form={form} setForm={setForm} />
+
       </div>
+
       <div className="p-36">
-        <Gallery
-          user={user}
-          />
+        <Gallery user={user} />
       </div>
     </div>
   );

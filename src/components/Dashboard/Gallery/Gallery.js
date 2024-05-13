@@ -26,7 +26,7 @@ const Gallery = ({user}) => {
 
   return (
     <main className="p-4">
-        <header className="mb-4">
+      <header className="mb-4">
         <h1 className="text-left text-xl">Your Designs</h1>
         <hr />
       </header>

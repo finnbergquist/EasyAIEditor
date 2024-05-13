@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ImageSelector from './ImageSelector/ImageSelector';
 import DataUploader from './DataUploader/DataUploader';
+import ImageEditor from './ImageEditor/ImageEditor';
 import NewsletterSelectorType from './NewsletterSelectorType/NewsletterSelectorType';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { submitForm, getForm, updateForm } from '../../api/api';
@@ -53,24 +54,32 @@ function Form({setForm, form}) {
 
   return (
     <div className='flex flex-col h-screen'>
-        <Header/>
+        <div className='flex-none'>
+          <Header /> 
+        </div>
 
-        <div className='p-2 flex-grow overflow-auto'>
+        <div className='flex-1 overflow-hidden'>
             {expandedSection === 1 && (
+                <ImageEditor 
+                  setForm = {setForm}
+                  form = {form}
+                />
+            )}
+            {expandedSection === 2 && (
                 <ImageSelector 
                   setForm = {setForm} 
                   form = {form} 
                 />
             )}
 
-            {expandedSection === 2 && (
+            {expandedSection === 3 && (
                 <DataUploader 
                   setForm = {setForm} 
                   form = {form} 
                 />
             )}
         </div>
-        <div className='p-2 flex-none'>
+        {/* <div className='p-2 flex-none'>
             <div className='flex justify-between items-center'>
                 <button onClick={handleBackClick} className='flex items-center bg-white hover:bg-gray-200 p-2 hover:shadow-lg'>
                     <ChevronLeft size={36} />
@@ -84,7 +93,7 @@ function Form({setForm, form}) {
                     <span className='ml-2'>Next</span>
                 </button>
             </div>
-        </div>
+        </div> */}
     </div>
 );
 }

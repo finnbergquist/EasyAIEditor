@@ -1,4 +1,5 @@
 const baseUrl = process.env.REACT_APP_API_URL;
+const axios = require('axios');
 
 export const submitForm = async (form, userId) => {
   try {
@@ -116,3 +117,33 @@ export const authenticateUser = async (email, password) => {
     console.error('Error:', error);
   }
 }  
+
+export const uploadFile = async (file) => {
+  try {
+    const response = await fetch(`${baseUrl}/image/get-presigned-url`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ filename: file.name, filetype: file.type }),
+    });
+
+    const data = await response.json();
+
+    console.log('Presigned URL:', data);
+
+    const uploadResponse = await fetch(data.url, {
+      method: 'PUT',
+      body: file,
+    });
+
+    if (!uploadResponse.ok) {
+      throw new Error('Error uploading file');
+    }
+
+    const accessUrl = `https://${process.env.REACT_APP_AWS_BUCKET_NAME}.s3.${process.env.REACT_APP_AWS_REGION}.amazonaws.com/${data.key}`;
+    return { url: accessUrl, status: "success" };
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
