@@ -1,25 +1,24 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { Lasso, Crop } from 'lucide-react';
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
+import Mask from './Mask';
 
 const ImageEditor = ({ form }) => {
     const [editingText, setEditingText] = useState('');
+    const [selectedOption, setSelectedOption] = useState({ value: 'box', Icon: Crop, title: 'Box' });
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
 
     const handleTextChange = (e) => {
         setEditingText(e.target.value);
     };
 
+    const handleEditClick = () => {
+        console.log('Editing text:', editingText);
+    }
+
     const options = [
         { value: 'lasso', Icon: Lasso, title: 'Lasso' },
         { value: 'box', Icon: Crop, title: 'Box' },
     ];
-
-    const [crop, setCrop] = useState({ unit: '%', width: 30, aspect: 16 / 9 });
-
-    const [selectedOption, setSelectedOption] = useState(options[0]);
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
-
 
 
     return (
@@ -30,7 +29,7 @@ const ImageEditor = ({ form }) => {
                 <div className="h-4/5 w-full max-w-screen-lg overflow-hidden flex flex-row">
                     <div className='flex-none mr-4 h-full p-4 bg-gray-100 rounded-lg border border-gray-300 flex flex-col items-start'>
                         <div className="relative">
-                            <button 
+                            <button
                                 onClick={() => setDropdownOpen(!isDropdownOpen)}
                                 className="w-16 h-16 border border-gray-300 rounded-md text-gray-700 flex items-center justify-center"
                             >
@@ -54,19 +53,27 @@ const ImageEditor = ({ form }) => {
                             )}
                         </div>
                     </div>
-                    <div className="flex-grow h-full p-2 bg-gray-100 rounded-lg border border-gray-300">
-                            {/* <ReactCrop
-                                src={form.selectedImage}
-                                crop={crop}
-                                onChange={(newCrop) => setCrop(newCrop)}
-                                className="object-contain p-2 w-full h-full"
-                            /> */}
-                        <img
-                                src={form.selectedImage}
-                                alt="Editable Image"
-                                className="object-contain p-2 w-full h-full"
+                    <Mask 
+                        form = {form}
+                    />
+                    {/* <div className="flex-grow h-full p-2 bg-gray-100 rounded-lg border border-gray-300 relative">
+                        {form.selectedImage ? (
+                            
+                            <Mask
+                                form = {form} 
                             />
-                    </div>
+                            // <img
+                            //     src={form.selectedImage}
+                            //     alt="Selected Image"
+                            //     className="h-full w-full object-contain"
+                            // />
+
+                        ) : (
+                            <div className="flex items-center justify-center h-full text-gray-500">
+                                No image selected
+                            </div>
+                        )}
+                    </div> */}
                 </div>
 
                 {/* Text Editor and Button */}
@@ -77,7 +84,10 @@ const ImageEditor = ({ form }) => {
                         placeholder="Add your text here..."
                         className="resize-none flex-grow px-3 py-2 border border-gray-300 rounded-md bg-gray-100"
                     />
-                    <button className="ml-4 px-4 py-5 border border-gray-300 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">
+                    <button
+                        className="ml-4 px-4 py-5 border border-gray-300 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
+                        onClick={handleEditClick}
+                    >
                         Edit
                     </button>
                 </div>
