@@ -13,10 +13,9 @@ import { Navigate, useLocation } from 'react-router-dom';
 function ProtectedRoute({ user, children }) {
   let location = useLocation();
 
-  console.log("ProtectedRoute User:", user);
-
   if (!user.user_id) {
     // If the user is not logged in, redirect to the login page.
+    console.log('PROTECTED ROUTE: User is not logged in. Redirecting to login page. User: ', user);
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

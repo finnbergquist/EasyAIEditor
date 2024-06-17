@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 function NewsletterPreferenceDropdown({ form, setForm }) {  
   const formOfDelivery = form.formOfDelivery;
-  console.log("Current form od edit", formOfDelivery);
 
   const handleChange = (event) => {
     setForm({

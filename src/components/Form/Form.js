@@ -3,99 +3,68 @@ import ImageSelector from './ImageSelector/ImageSelector';
 import DataUploader from './DataUploader/DataUploader';
 import ImageEditor from './ImageEditor/ImageEditor';
 import NewsletterSelectorType from './NewsletterSelectorType/NewsletterSelectorType';
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { submitForm, getForm, updateForm } from '../../api/api';
-import { useParams,useNavigate } from 'react-router-dom'
+import { submitForm, getForm } from '../../api/api';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
+import { Loader } from 'lucide-react';
 
-function Form({setForm, form}) {
+function Form({ setForm, form, user, setUser }) {
   const { id } = useParams();
-  useEffect(() => {
-    if (id) {
-      getForm(id)
-        .then(data => {
-          setForm(data.data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
-  }, []);
   const navigate = useNavigate();
-      
-  const [expandedSection, setExpandedSection] = useState(1);
-  const toggleSection = sectionNumber => {
-    setExpandedSection(sectionNumber);
-  };
+  const [isLoading, setLoading] = useState(true);
 
-  const handleNextClick = () => {
-    if (expandedSection < 3) {
-      setExpandedSection(expandedSection + 1);
-    }
-  };
 
-  const handleBackClick = () => {
-    if (expandedSection > 1) {
-      setExpandedSection(expandedSection - 1);
-    } else {
-      navigate('/dashboard')
-    }
-  };
+  useEffect(() => {
+    const fetchForm = async () => {
+      if (id) {
+        try {
+          console.log("Fetching form");
+          const data = await getForm(id);
+          setForm(data.data);
+        } catch (error) {
+          if (error.message === 'Unauthorized') {
+            navigate('/login');
+          }
+          console.error('Error:', error);
+        } finally {
+          setLoading(false); // Set loading to false after the fetch is complete
+        }
+      } else {
+        setLoading(false); // No ID provided, set loading to false
+      }
+    };
 
-  const handleSaveClick = () => {
-    updateForm(form, id)
-      .then(data => {
-        setForm(data.data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    fetchForm();
+  }, [id, setForm, navigate]);
+
+  if (isLoading) {
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <Loader size={64} />
+      </div>
+    );
   }
 
   return (
     <div className='flex flex-col h-screen'>
-        <div className='flex-none'>
-          <Header /> 
-        </div>
+      <div className='flex-none'>
+        <Header 
+          user={user}
+          setUser={setUser} 
+        /> 
+      </div>
 
-        <div className='flex-1 overflow-hidden'>
-            {expandedSection === 1 && (
-                <ImageEditor 
-                  setForm = {setForm}
-                  form = {form}
-                />
-            )}
-            {expandedSection === 2 && (
-                <ImageSelector 
-                  setForm = {setForm} 
-                  form = {form} 
-                />
-            )}
-
-            {expandedSection === 3 && (
-                <DataUploader 
-                  setForm = {setForm} 
-                  form = {form} 
-                />
-            )}
-        </div>
-        {/* <div className='p-2 flex-none'>
-            <div className='flex justify-between items-center'>
-                <button onClick={handleBackClick} className='flex items-center bg-white hover:bg-gray-200 p-2 hover:shadow-lg'>
-                    <ChevronLeft size={36} />
-                    <span className='ml-2'>Back</span>
-                </button>
-                <div className='mx-auto text-center'>
-                    {form.prompt}
-                </div>
-                <button onClick={handleNextClick} className='flex items-center bg-white hover:bg-gray-200 p-2 hover:shadow-lg'>
-                    <ChevronRight size={36} />
-                    <span className='ml-2'>Next</span>
-                </button>
-            </div>
-        </div> */}
+      <div className='flex-1 overflow-hidden'>
+        <ImageEditor 
+          setForm={setForm}
+          form={form}
+          id={id}
+          user={user}
+          setUser={setUser}
+        />
+      </div>
     </div>
-);
+  );
 }
 
 export default Form;

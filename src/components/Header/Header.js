@@ -12,7 +12,9 @@ function Header({user, setUser}) {
           <Home className="text-2xl" />
         </Link>
       </div>
-      <Profile />
+      <Profile
+        user = {user}
+        setUser={setUser} />
     </header>
   );
 }

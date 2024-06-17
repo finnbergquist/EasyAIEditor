@@ -38,7 +38,6 @@ class Prompter extends React.Component {
             Generate
           </button>
         </div>
-        {this.props.loading && <Loader className="animate-spin h-5 w-5 ml-3" />}
       </div>
     );
   }

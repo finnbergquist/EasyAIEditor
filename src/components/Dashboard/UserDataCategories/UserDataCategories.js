@@ -32,7 +32,6 @@ class UserDataCategories extends React.Component {
     };
     handleSubmit = (event) => {
       event.preventDefault();
-      console.log("Form Submitted:", this.state);
     };
     handleAddForm = () => {
       this.setState({

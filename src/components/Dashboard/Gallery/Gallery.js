@@ -17,11 +17,10 @@ const Gallery = ({user}) => {
       }
     };
     fetchImages();
-  }, []);
+  }, [user]);
 
   const editForm = (formId) => {
     navigate(`/form/${formId}`);
-    
   }
 
   return (
