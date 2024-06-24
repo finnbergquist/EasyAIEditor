@@ -17,7 +17,6 @@ function Profile({user, setUser}) {
                 setIsOpen(false);
             }
         }
-
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -38,8 +37,8 @@ function Profile({user, setUser}) {
     const handleSave = async () => {
       try {
         const updatedUser = await updateUser(user);
-        console.log("SettingUser", updatedUser);
         setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
         setIsEditingKey(false);
       } catch (error) {
         if (error.response && error.response.status === 401) {

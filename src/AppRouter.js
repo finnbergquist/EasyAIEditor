@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from './components/Dashboard/Dashboard.js'; 
 import Form from './components/Form/Form.js';
 import Login from './components/Login/Login.js';
@@ -39,6 +39,10 @@ function AppRouter() {
           } />
           <Route path="/form/:id" element={
               <Form form={form} setForm={setForm} user={user} setUser={setUser}/>
+          } />
+
+          <Route path="/" element={
+                <Navigate to="/login" replace />
           } />
         </Routes>
       </Router>

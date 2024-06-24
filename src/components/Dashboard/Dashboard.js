@@ -22,10 +22,9 @@ const Dashboard = ({ form, setForm, user, setUser }) => {
   return (
     <div>
       <Header user={user} setUser={setUser}/>
+      
       <div className="mt-4 px-36 py-8">
-
         <ImageUploader form={form} setForm={setForm} user={user} setUser={setUser} />
-
       </div>
 
       <div className="p-36">
