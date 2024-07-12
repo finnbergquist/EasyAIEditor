@@ -13,7 +13,10 @@ const Gallery = ({user}) => {
         const response = await getUserForms(user.user_id);//Change to the userid
         setForms(response);
       } catch (error) {
-        console.error("Failed to fetch images", error);
+          if (error.message === 'Unauthorized') {
+              navigate('/login');
+            }
+          console.error('Error:', error);
       }
     };
     fetchImages();

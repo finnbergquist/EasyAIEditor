@@ -7,6 +7,11 @@ export const submitForm = async (form, userId) => {
     'Authorization': `Bearer ${token}`
   };
 
+  const user = localStorage.getItem('user');
+  if (user?.data?.openAPIKey) {
+    form.userAPIKey = user.data.openAPIKey;
+  }
+
   try {
     const response = await fetch(`${baseUrl}/form/${userId}`, {
       method: 'POST',
@@ -25,7 +30,10 @@ export const updateForm = async (form, id) => {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
   };
-
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user.data?.openAPIKey) {
+    form.userAPIKey = user.data.openAPIKey;
+  }
   try {
     const response = await fetch(`${baseUrl}/form/${id}`, {
       method: 'PUT',
@@ -35,6 +43,7 @@ export const updateForm = async (form, id) => {
     return await response.json();
   } catch (error) {
     console.error('Error:', error);
+    return error;
   }
 };
 
@@ -161,9 +170,7 @@ export const authenticateUser = async (email, password='', temporaryPassword='')
 
     const data = await response.json();
 
-    console.log('Data:', data);
     // Store the token in localStorage
-
     if (data.isAuthenticated){
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));

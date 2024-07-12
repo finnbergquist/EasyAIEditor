@@ -58,7 +58,7 @@ const ImageUploader = ({ form, setForm, user, setUser }) => {
             setTextError(true);
             return;
         }
-        if (user.data.freeAPIRequests <= 0) {
+        if (user.data.freeAPIRequests <= 0 && !user.data.openAPIKey) {
             alert("You have reached the limit of free API calls. Please enter your own API key to continue using the service");
             return;
         }

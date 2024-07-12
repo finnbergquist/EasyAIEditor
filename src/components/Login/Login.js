@@ -28,7 +28,6 @@ function Login({ user, setUser }) {
     if (!response.error) {
       setCodeSent(true);
     } else {
-      console.log(response.error);
       setError(response.error);
     }
   };

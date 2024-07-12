@@ -38,7 +38,7 @@ const ImageEditor = ({ setForm, form, id, user, setUser}) => {
             setTextError(true);
             return;
         }
-        if (user.data.freeAPIRequests <= 0) {
+        if (user.data.freeAPIRequests <= 0 && !user.data.openAPIKey) {
             alert("You have reached the limit of free API calls. Please enter your own API key to continue using the service");
             return;
         }
@@ -64,6 +64,10 @@ const ImageEditor = ({ setForm, form, id, user, setUser}) => {
             const response = updateForm(updatedForm, id)
                 .then(data => {
                     setLoading(false);
+                    if (data.error) {
+                        alert("Incorrect API key. Please try again.");
+                        return;
+                    }
                     setForm(data.data);
                     getUser(user.user_id)
                         .then(data => {

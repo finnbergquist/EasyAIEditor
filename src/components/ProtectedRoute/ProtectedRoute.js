@@ -15,7 +15,6 @@ function ProtectedRoute({ user, children }) {
 
   if (!user.user_id) {
     // If the user is not logged in, redirect to the login page.
-    console.log('PROTECTED ROUTE: User is not logged in. Redirecting to login page. User: ', user);
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

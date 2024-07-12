@@ -11,8 +11,6 @@ function AppRouter() {
     const [user, setUser] = useState(null);
     const [form, setForm] = useState('');
 
-    console.log('User', user);
-
     useEffect(() => {
       // Log all local storage contents
       const storedUser = localStorage.getItem('user');
