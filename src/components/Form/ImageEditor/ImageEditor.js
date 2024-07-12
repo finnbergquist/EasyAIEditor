@@ -87,7 +87,6 @@ const ImageEditor = ({ setForm, form, id, user, setUser}) => {
     }
 
     const options = [
-        { value: 'lasso', Icon: Lasso, title: 'Lasso' },
         { value: 'box', Icon: Crop, title: 'Box' },
     ];
 
