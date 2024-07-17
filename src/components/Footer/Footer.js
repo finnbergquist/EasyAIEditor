@@ -36,42 +36,7 @@ import {
                 <GithubIcon className="h-6 w-6" />
               </a>
             </div>
-            <div className="text-center md:text-left">
-              <h3
-                className="text-sm font-semibold text-gray-400 tracking-wider uppercase" >
-                Company
-              </h3>
-              <ul role="list" className="mt-4 space-y-4">
-                <li>
-                  <a
-                    href="/about"
-                    className="text-base text-gray-500 hover:text-gray-900" >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/contact"
-                    className="text-base text-gray-500 hover:text-gray-900" >
-                    Contact Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/privacy"
-                    className="text-base text-gray-500 hover:text-gray-900" >
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/terms"
-                    className="text-base text-gray-500 hover:text-gray-900" >
-                    Terms of Service
-                  </a>
-                </li>
-              </ul>
-            </div>
+            
             <div className="text-center md:text-left">
               <h3
                 className="text-sm font-semibold text-gray-400 tracking-wider uppercase" >

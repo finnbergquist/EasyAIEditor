@@ -11,7 +11,7 @@ function Header({user, setUser}) {
     <header className="flex justify-between items-center p-2 ">
       <div className = "flex items-center justify-center p-2 text-xl font-semibold transition duration-200 ease-in-out hover:bg-gray-200">
         <Link to="/dashboard">
-          <img src={headerLogo} alt="Website Logo" className="text-2xl" /> {/* Replace Home icon with img tag */}
+        <img src={headerLogo} alt="Website Logo" style={{ height: '50px' }} className="header-logo" />
         </Link>
       </div>
       <Profile
