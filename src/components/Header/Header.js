@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from '../Profile/Profile';
 import { Link } from 'react-router-dom';
-import headerLogo from '../../../public/headerLogo.png'; // Adjust the path as necessary
+import headerLogo from './headerLogo.png'; // Adjust the path as necessary
 
 
 
