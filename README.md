@@ -1,4 +1,4 @@
-# Easy AI EDitor
+# Easy AI Editor
 
 Easy AI EDitor is a React-based web application that serves as a wrapper for DALL-E 2, providing an intuitive interface for AI-powered photo editing using a "highlight and prompt" editing style:
 
