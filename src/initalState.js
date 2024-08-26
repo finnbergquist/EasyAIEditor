@@ -7,17 +7,4 @@ export const initialState = {
       images: [],
       selectedImage: "",
     },
-
-    //data about the currently logged in user
-    user: { 
-      user_id: 0,
-      email: "",
-      password: "",
-      data: {
-        forms: [],
-        name: "",
-        freeAPIRequests: 2,
-        openAIKey: false,
-      },
-    }
   };
