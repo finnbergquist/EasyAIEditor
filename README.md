@@ -1,6 +1,6 @@
 # Easy AI Editor
 
-Easy AI EDitor is a React-based web application that serves as a wrapper for DALL-E 2, providing an intuitive interface for AI-powered photo editing using a "highlight and prompt" editing style. As an experiment, I also built my own Auth and user management systems. My backend microservice for this project is private. The purpose of this repo is to simply show how the frontend is built.
+Easy AI EDitor is a React-based web application that serves as a wrapper for DALL-E 2, providing an intuitive interface for AI-powered photo editing using a "highlight and prompt" editing style. As an experiment, I also built my own Auth and user management systems. My backend microservices for this project are private. The purpose of this repo is to simply show how the frontend is built.
 
 <h1></h1>
 <img src="https://github.com/user-attachments/assets/e1366cd0-fcd3-4f31-b11e-17d1b169f990" alt="Screen Shot 2024-08-22 at 1 59 00 PM" width="400">
